@@ -21,7 +21,7 @@ int main(){
  
 //p11
 
-#if 1
+#if 0
 
 void ex1_9(){
     int sum =0;
@@ -71,6 +71,45 @@ int mian(){
 
 #endif
 
+#if 1
 
+void ex1_13_9(){
+    int sum=0;
+    for(int val=50;val <=100;val++){
+        sum +=val;
+    }
+    std::cout<<"50到100:"<<sum<<std::endl;
+}
+
+
+void ex1_13_10(){
+    for(int val=10;val>=0;val --){
+        std::cout<<val<<"";
+    }
+    std::cout<<std::endl;
+}
+
+void ext1_13_11(){
+    std::cout<<"lianggezhengshuwei:";
+    int v1=0,v2=0;
+    if(v1>v2){
+        int temp=v1;
+        v1=v2;
+        v2=temp;
+    }
+
+    std::cout<<"zhengshu:";
+    for(int i=v1;i<v2;i++){
+        std::cout<<i;
+    }
+     std::cout<<std::endl; 
+}
+
+
+int main(){
+    ex1_13_9();
+}
+
+#endif
 
 
