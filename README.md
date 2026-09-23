@@ -10,8 +10,9 @@
 ## 每日打卡
 | 日期 | 今天做了什么 | 笔记/代码 |
 |---|---|---|
-| 06-10 | RAII 概念 + 文件守卫练习 | notes/raii.md |
-| 06-11 | LeetCode 两题 | leetcode/0001/ |
+| 09-22 | 精读《C++ Primer》第 1~2 章（至 2.3.2 节指针），完成配套练习题，掌握了 IO、控制流、类型转换、作用域、引用与指针基础 | [cpp-primer/ch01-07-basics/main1.cpp&cho2] |
+| 09-23 | LeetCode 两题 | leetcode/0001/ |
+
 
 ## 目录说明
 - `notes/` 概念笔记

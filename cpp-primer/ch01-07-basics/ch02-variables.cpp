@@ -90,4 +90,40 @@ int main() {
 }
 #endif
 
+//p54(const)
+#if 0
+ const int buf;  不合法 因为 buf 是一个常量（const），常量一旦诞生就必须有个固定值const int buf = 0;
+ int cnt = 0;  合法
+ const int sz = cnt; 合法
+ ++cnt; ++sz; 不合法++cnt 是没问题的，cnt 是普通变量。但是 ++sz 是绝对不允许的！ 因为 sz 是 const（常量）
+
+#endif
+
+//p57
+#if 0
+引用必须绑定到对象，const 变量和 const 指针必须初始化
+int i = -1, &r = 0; 不合法 r 是普通引用（int&），必须绑定到变量（左值）。而 0 是字面量（右值），普通引用绑不了。
+int *const p2 = &i2;合法
+const int i = -1, &r = 0;  合法
+const int *const p3 = &i2;  合法
+const int i2 = i, &r = i;  合法
+
+
+int i, *const cp; 不合法 必须在定义时初始
+i = ic;  合法 i 是普通 int，ic 是 const int。把只读的值赋给可写变量
+
+#endif
+
+
+//p57  2.4.3
+#if 0
+顶层 const 是锁住自己（指针本身），底层 const 是锁住目标（指向的值）。
+const int v2 = 0;  顶层 const
+const int *p2 = &v2  底层 const。
+const int &r2 = v2; 底层 const。引用的const永远是底层。r2 只是个别名，不能改变绑定关系，但它绑定的对象 v2 是 const 的。
+*const p3 = &i 顶层 const。p3 本身是常量指针，但它指向的 i 是普通的 int
+
+int null = 0, *p = null;指针只能存地址，不能存整数
+
+#endif
 
