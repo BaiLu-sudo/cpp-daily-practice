@@ -127,3 +127,56 @@ int null = 0, *p = null;指针只能存地址，不能存整数
 
 #endif
 
+
+//p65  自定义数据类型（结构体 / 类）
+#if 0
+
+#include <string>
+struct sale_data{
+    std::string bookno;
+    double price=0.0;
+    unsigned units_sold =0;
+
+    double total_revenue()const{
+        return price* units_sold;
+    }
+};
+
+int main(){
+    sale_data item1;
+    item1.bookno = "978-7-121-15535-2";
+    item1.price = 59.90;
+    item1.units_sold = 5;
+
+    std::cout << "书籍编号: " << item1.bookNo << std::endl;
+    std::cout << "单价: " << item1.price << " 元" << std::endl;
+    std::cout << "销量: " << item1.units_sold << " 本" << std::endl;
+    std::cout << "总销售额: " << item1.total_revenue() << " 元" << std::endl;
+
+    return 0;
+}
+
+#endif
+
+
+//auto decltype
+#if 0
+
+int main(){
+    int a =10;
+    int &r =a;
+    auto x=r;// auto 只拿值，x 是全新的 int
+    x=99;
+    std::cout<<"xiugai x hou,a de zhi shi:"<<a<<ensl;
+    // 输出 10，a 没变
+
+
+    decltype(r)y=a; // decltype(r) 是 int&，所以 y 也是 a 的别名
+    y=88;// 修改 y（也就是修改 a）
+    std::cout<<a<<std::endl;
+    return 0;// 输出 88，a 变了！
+
+
+}
+
+#endif
