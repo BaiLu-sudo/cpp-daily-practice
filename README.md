@@ -12,6 +12,8 @@
 |---|---|---|
 | 09-22 | 精读《C++ Primer》第 1~2 章（至 2.3.2 节指针），完成配套练习题，掌握了 IO、控制流、类型转换、作用域、引用与指针基础 | [cpp-primer/ch01-07-basics/main1.cpp&cho2] |
 | 09-23 |完成《C++ Primer》第 2 章剩余难点（const、auto、decltype、自定义结构体 Sales_data）及第 3 章全部内容（string、vector、迭代器、数组与指针混合操作、C风格字符串转换）；完成 3.1~3.5 全部配套练习|./cpp-primer/ch01-07-basics/cho3.cpp) |
+| 09-28 | 完成《C++ Primer》第 4 章（表达式）全部内容及配套练习（4.1~4.38）；掌握算术/逻辑/关系/赋值/递增递减/条件/位/逗号运算符； | [ch04.cpp](./cpp-primer/ch01-07-basics/ch04.cpp) |
+
 
 
 
