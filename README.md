@@ -14,6 +14,8 @@
 | 09-23 |完成《C++ Primer》第 2 章剩余难点（const、auto、decltype、自定义结构体 Sales_data）及第 3 章全部内容（string、vector、迭代器、数组与指针混合操作、C风格字符串转换）；完成 3.1~3.5 全部配套练习|./cpp-primer/ch01-07-basics/cho3.cpp) |
 | 09-28 | 完成《C++ Primer》第 4 章（表达式）全部内容及配套练习（4.1~4.38）；掌握算术/逻辑/关系/赋值/递增递减/条件/位/逗号运算符； | [ch04.cpp](./cpp-primer/ch01-07-basics/ch04.cpp) |
 
+| 09-29 | 完成《C++ Primer》第 5 章（语句）全部内容及配套练习（5.1~5.25），熟练 if/switch 作用域、for/while/do-while 循环控制、break/continue 以及 try-catch 异常处理机制；完成了第 6 章 6.1、6.2 节（函数基础与参数传递）配套练习，熟练分离式编译、局部静态变量、指针/引用传参与 const 引用的最佳实践 | [ch05.cpp](./cpp-primer/ch01-07-basics/ch05.cpp), [ch06.cpp](./cpp-primer/ch01-07-basics/ch06.cpp) |
+
 
 
 
