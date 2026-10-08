@@ -303,6 +303,55 @@ int main() {
 }
 
 
+练习 6.40：哪个声明错误？
+(a) int ff(int a, int b = 0, int c = 0);  正确
+
+规则：一旦某个形参有了默认值，它后面的所有形参都必须有默认值。b 有默认值，c 也有，符合规则。
+(b) char *init(int ht = 24, int wd, char bckgrnd); 错误！
+原因：ht 有默认值，但它后面的 wd 和 bckgrnd 却没有默认值。这违反了“默认值必须从右向左连续定义”的规则。
+纠正思路：要么把 ht 的默认值去掉（int ht），要么给 wd 和 bckgrnd 也补上默认值。
+
+#endif
+
+
+//p223
+#if 0
+什么是函数指针？
+函数也有内存地址，函数指针就是存储函数地址的“遥控器”。
+int (*pf)(int, int) 看起来很难懂，拆开看：
+pf：变量名（遥控器）。
+int (*)(int, int)：告诉编译器，这个遥控器只能控制“接收两个 int，返回 int”的函数。
+ 必须加括号！ int *pf(int, int) 是一个函数声明（返回 int*）；int (*pf)(int, int) 才是函数指针。
+
+// 练习 6.54：声明一个接受两个 int 返回 int 的函数
+// 然后声明一个 vector，其元素是指向该函数的指针
+#include <iostream>
+#include <vector>
+
+using std::cout; using std::endl; using std::vector;
+nt add(int a, int b) { return a + b; }
+int subtract(int a, int b) { return a - b; }
+int multiply(int a, int b) { return a * b; }
+int divide(int a, int b) { return (b != 0) ? a / b : 0; } 
+vector<int (*)(int, int)> funcVec = {add, subtract, multiply, divide};
+
+int main() {
+    cout << "=== 练习 6.56 验证 ===" << endl;
+
+    // 3. 遍历 vector，调用每个函数并输出结果
+    // 这里的 auto f 代表遍历到的每一个“函数指针”
+    for (auto f : funcVec) {
+        // f(10, 5) 相当于调用当前指向的函数
+        cout << "调用函数结果: " << f(10, 5) << endl;
+    }
+
+    return 0;
+}
+
+// 定义一个别名 FuncPtr，代表“接收两个 int 返回 int 的函数指针”
+using FuncPtr = int (*)(int, int); 
+// 这样声明就清爽多了
+vector<FuncPtr> funcVec = {add, subtract, multiply, divide};
 #endif
 
 
