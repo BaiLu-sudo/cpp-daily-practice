@@ -16,6 +16,7 @@
 
 | 09-29 | 完成《C++ Primer》第 5 章（语句）全部内容及配套练习（5.1~5.25），熟练 if/switch 作用域、for/while/do-while 循环控制、break/continue 以及 try-catch 异常处理机制；完成了第 6 章 6.1、6.2 节（函数基础与参数传递）配套练习，熟练分离式编译、局部静态变量、指针/引用传参与 const 引用的最佳实践 | [ch05.cpp](./cpp-primer/ch01-07-basics/ch05.cpp), [ch06.cpp](./cpp-primer/ch01-07-basics/ch06.cpp) |
 
+| 10-09 | 完成《C++ Primer》第 6 章剩余内容（6.3~6.7 节：返回类型、函数重载、默认实参、内联函数与 constexpr、函数指针）及第 7 章 7.1~7.4 节（类基础、封装、友元、类作用域）；完成配套习题；掌握 this 指针、const 成员函数、构造函数（包括委托构造）、explicit 关键字、静态成员等核心知识 | [ch06.cpp](./cpp-primer/ch01-07-basics/ch06.cpp), [ch07.cpp](./cpp-primer/ch01-07-basics/ch07.cpp) |
 
 
 

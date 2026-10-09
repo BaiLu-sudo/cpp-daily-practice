@@ -141,9 +141,84 @@ private:
 返回给谁？ 返回给了调用者。所以 myScreen.move(4,0) 这个表达式执行完，结果就是 myScreen 本身（带着新坐标）
 #endif
 
+//p261
+#if 0
+struct X {
+    X (int i, int j): base(i), rem(base % j) { }
+    int rem, base; //  注意这里的声明顺序！
+};
+C++ 有一个极其反直觉的规则：成员初始化的顺序，只跟它们在类中“声明”的顺序有关，跟初始化列表里写的顺序完全无关！
+这里 rem 在 base 之前声明。所以编译器会先初始化 rem。而初始化 rem 时用了 base % j，但此时 base 还没有被初始化（它是随机的垃圾值），导致程序出错。
 
 
 
+//委托构造函数
+让一个构造函数去调用另一个构造函数，让后者先帮它把基础活儿干完，然后自己再干剩下的。
+语法：在初始化列表的位置直接调用目标构造函数 类名(参数)。
+执行顺序：先执行被委托的构造函数，再执行委托构造函数自己的函数体。
+#include <iostream>
+#include <string>
+
+using std::cout; using std::endl; using std::string; using std::istream;
+
+struct Sales_data {
+    string bookNo;
+    unsigned units_sold = 0;
+    double revenue = 0.0;
+
+    // 1. 核心目标构造函数（最全参数的）
+    Sales_data(const string &s, unsigned n, double p) : bookNo(s), units_sold(n), revenue(p) {
+        cout << "  [执行] 三参数构造函数体" << endl;
+    }
+
+    // 2. 默认构造函数：委托给三参数构造函数
+    Sales_data() : Sales_data("", 0, 0) {
+        cout << "  [执行] 默认构造函数体" << endl;
+    }
+
+    // 3. 单参构造函数：委托给三参数构造函数
+    Sales_data(const string &s) : Sales_data(s, 0, 0) {
+        cout << "  [执行] 单参数构造函数体" << endl;
+    }
+
+    // 4. istream 构造函数：先委托给默认构造函数（保证初始安全），再读取数据
+    Sales_data(istream &is) : Sales_data() { 
+        is >> bookNo >> units_sold >> revenue;
+        cout << "  [执行] istream 构造函数体" << endl;
+    }
+};
+
+
+#endif
+
+//p264
+#if 0
+NoDefault 有一个接收 int 的构造函数，没有默认构造函数。类 C 有一个 NoDefault 类型的成员，需要定义 C 的默认构造函数。
+人话思路：因为 NoDefault 没有默认构造函数，所以 C 不能“默认”初始化它的成员，必须在 C 的初始化列表里显式指定怎么初始化
+class NoDefault {
+public:
+    NoDefault(int i) { /* ... */ } // 只有这个带参数的构造函数
+};
+
+class C {
+public:
+    NoDefault nd; // 成员
+    
+    //  修正：在初始化列表里显式调用 NoDefault 的构造函数
+    C() : nd(0) { } 
+};
+
+
+
+(a) 一个类必须至少提供一个构造函数。  不正确
+如果类没有定义任何构造函数，编译器会替它生成一个合成的默认构造函数（Synthesized Default Constructor）。
+(b) 默认构造函数是参数列表为空的构造函数。  不正确（或不严谨）
+定义是“可以不需要实参就能调用的构造函数”。它可能参数列表为空；也可能所有参数都有默认值（例如 Foo(int i = 0)）。C++11 还有 = default。
+(c) 如果对于类来说不存在有意义的默认值，则类不应该提供默认构造函数。  正确
+这是类设计的准则。例如，一个“日期”类如果没有合理的“零值”默认状态，就不应该提供默认构造函数，强制用户必须传参初始化。
+(d) 如果类没有定义默认构造函数，则编译器将为其生成一个并把每个数据成员初始化成相应类型的默认值。 不正确
+大坑在这里：如果类定义了任何构造函数（哪怕只有一个带参数的），编译器就绝不会再生成默认构造函数。
+#endif
 
 
 
