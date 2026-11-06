@@ -331,12 +331,73 @@ IntP p0(ix);  编译报错。
 
 //423
 #if 0
+为什么需要 weak_ptr？
+shared_ptr（强引用）：像一根铁链，拴着房子，只要有一个人还拉着，房子就不拆。
 
+weak_ptr（弱引用）：像一根透明的线。它只是远远地看着房子，不增加引用计数。如果铁链全断了，房子拆了，这根透明线也会自动失效（不会引发崩溃）。
+
+为什么要用弱引用？
+如果你在 StrBlobPtr 里用 shared_ptr 指向 StrBlob，就会导致循环引用（互相拉着，永远不死）。所以我们用 weak_ptr 去“弱弱地看”着它。
 
 #endif
 
+//p426
+#if 0
+new int[10]，可能会觉得它很鸡肋。但为了读懂老代码，我们必须知道它是什么。用一句“人话”解释：new T[] 就是系统给你划了一块连续的地皮，必须手动 delete[] 归还，而且你一旦越界，系统直接死给你看。
+
+连接两个字符串字面常量（"hello" 和 "world"），存入动态分配的 char 数组。
+#include <iostream>
+#include <cstring> // C 风格字符串函数
+#include <string>
+#include <memory>  // unique_ptr
+
+using namespace std;
+void test_12_23() {
+const char* s1="hello";
+const char* s2="world";
+
+size_t len =strlen(s1)+strlen(s2)+1;
+
+char* p =new char[len];
+strcp(p,s1);
+strcat(p,s2);
+
+delete[]p;
+
+string str1="hello";
+string str2="world";
+string result=str1+str2;
+}
+
+读一个字符串存入动态分配的 char 数组。描述如何处理变长输入。
+致命陷阱：在 C++ 里，new char[n] 是一旦固定就绝对无法扩充的。如果你分配了 5 个格子，用户输入了 10 个字母，就会发生缓冲区溢出（越界），这是极其严重的安全漏洞。
+
+正确的处理方式
+先用 std::string 接收用户输入（它会自动扩容）。
+拿到它的长度，然后再 new char[size + 1]。
+用 strcpy 把它拷进去。
+
+void test_12_24(){
+
+    string input;
+    cin>>input;
+    // 按真实长度分配动态数组（+1 留给 '\0'
+    chat* dynamic_arr=new chaat[intut.size()+1];
+    strcpy(dynamic_arr, input.c_str());
+
+    delete[] dynamic_arr; // 记得释放！
+}
 
 
+如何释放？
+int *pa = new int[10]; 如何释放？
+答案：delete[] pa;
+
+为什么不能用 delete pa;？
+new 单个对象，用 delete。
+new[] 分配数组，必须用 delete[]。
+如果你用 delete pa; 去释放数组，C++ 标准说是“未定义行为”。轻则只释放了第一个元素的内存（内存泄漏），重则直接导致程序崩溃。必须严格配对！
+#endif
 
 
 
